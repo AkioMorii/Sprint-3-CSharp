@@ -1,5 +1,9 @@
-Projeto desenvolvido em C# MVC exibindo uma pagína simples de um CRUD de contatos.
-O banco de dados usado foi o Postgre e a query é:
+Orlando Akio Morii Cardoso RM98067
+Pedro Henrique Alves Guariente RM550301
+David de Medeiros Pacheco Junior RM551462
+
+Projeto desenvolvido em C# MVC exibindo uma pagÃ­na simples de um CRUD de contatos.
+O banco de dados usado foi o Postgre e a query Ã©:
 	CREATE TABLE CONTATOS (
 		Id SERIAL PRIMARY KEY,
 		Nome VARCHAR(100) NOT NULL,
@@ -33,7 +37,7 @@ O banco de dados usado foi o Postgre e a query é:
 
 Para utilizar o projeto:
 	- Clonar para uma pasta;
-	- Intalar dependências (Microsoft.EntityFrameworkCore, Npgsql, Npgsql.EntityFrameworkCore.PostgreSQL);
+	- Intalar dependÃªncias (Microsoft.EntityFrameworkCore, Npgsql, Npgsql.EntityFrameworkCore.PostgreSQL);
 	- Criar o banco de dados usando a query escrita;
-	- Acessar o arquivo appsettings.json e colocar as especificações do seu BD em "DefaultConnection";
+	- Acessar o arquivo appsettings.json e colocar as especificaÃ§Ãµes do seu BD em "DefaultConnection";
 	- Rodar o projeto.
