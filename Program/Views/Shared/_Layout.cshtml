@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Agenda de Contatos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    @* Adicione aqui seus próprios arquivos de CSS *@
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    @{
+        ViewData["ShowMenu"] = true;
+    }
+
+    @* Exibe o menu só se ViewData["ShowMenu"] == true *@
+    @if (ViewData["ShowMenu"] as bool? == true)
+    {
+        @await Html.PartialAsync("_Menu")
+    }
+    <div class="container">
+        @RenderBody() <!-- Aqui o conteúdo da view específica será inserido -->
+    </div>
+
+    <!-- Scripts JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    @* Adicione seus próprios scripts JavaScript *@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#CPF').mask('000.000.000-00');
+            $('#Telefone').mask('(00) 00000-0000');
+        });
+
+        function formatCPF(input) {
+            let value = input.value.replace(/\D/g, '').slice(0, 11);
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            input.value = value;
+        }
+
+        function formatTelefone(input) {
+            let value = input.value.replace(/\D/g, '');
+            let formattedValue = '';
+            let cursorPosition = input.selectionStart;
+
+            if (value.length <= 10) {
+                if (value.length > 2) {
+                    formattedValue += `(${value.slice(0, 2)}) `;
+                    value = value.slice(2);
+                } else {
+                    formattedValue += `(${value}`;
+                    return input.value = formattedValue;
+                }
+
+                if (value.length > 4) {
+                    formattedValue += `${value.slice(0, 4)}-`;
+                    value = value.slice(4);
+                } else {
+                    formattedValue += `${value}`;
+                    return input.value = formattedValue;
+                }
+
+                formattedValue += value;
+            } else {
+                // Formatação de 11 dígitos (DDD + celular)
+                formattedValue += `(${value.slice(0, 2)}) `;
+                value = value.slice(2);
+
+                formattedValue += `${value.slice(0, 5)}-`;
+                value = value.slice(5);
+
+                formattedValue += value;
+            }
+
+            input.value = formattedValue;
+            let newCursorPosition = cursorPosition;
+
+            if (newCursorPosition > 2 && newCursorPosition <= 3) {
+                newCursorPosition = 4;
+            } else if (newCursorPosition > 6 && newCursorPosition <= 10) {
+                newCursorPosition = 11;
+            } else if (newCursorPosition > 11 && newCursorPosition <= 15) {
+                newCursorPosition = 16;
+            }
+
+            input.setSelectionRange(newCursorPosition, newCursorPosition);
+        }
+
+
+        
+    </script>
+
+</body>
+</html>

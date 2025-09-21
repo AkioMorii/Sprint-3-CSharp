@@ -1,0 +1,33 @@
+﻿@model AgendaContatos.Models.Transacoes
+@{
+    ViewData["Title"] = "Nova transação";
+}
+
+<h1>Criar Nova transação</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Nome">Nome da Transação</label>
+        <input asp-for="Nome" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Valor"></label>
+        <input type="number" asp-for="Valor" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ContatoId">Contato que fez a transação:</label>
+        <select class="form-select" id="ContatoId" name="ContatoId" required asp-for="ContatoId">
+            <option value="">Selecione...</option>
+            @foreach (var item in ViewBag.Contatos)
+            {
+                @:<option value="@item.Id">@item.Nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descricao"></label>
+        <input asp-for="Descricao" class="form-control" id="Descricao" type="text" />
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>

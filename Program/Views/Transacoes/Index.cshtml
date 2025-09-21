@@ -1,0 +1,38 @@
+@model IEnumerable<AgendaContatos.Models.Transacoes>
+    @{
+    ViewData["Title"] = "Lista de Transacoes";
+    }
+
+    <h1>Transações</h1>
+
+    <form method="get" asp-action="Index">
+        <p>
+            Filtro por Nome:
+            <input type="text" name="filtroNome" />
+            <input type="submit" value="Buscar" />
+        </p>
+    </form>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Adicionar Transação</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Descricao</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Valor</td>
+                <td>@item.Descricao/td>
+            </tr>
+        }
+        </tbody>
+    </table>

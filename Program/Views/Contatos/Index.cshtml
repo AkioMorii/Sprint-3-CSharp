@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AgendaContatos.Models.Contatos>
+@{
+    ViewData["Title"] = "Lista de Pessoas";
+}
+
+<h1>Pessoas</h1>
+
+<form method="get" asp-action="Index">
+    <p>
+        Filtro por Nome:
+        <input type="text" name="filtroNome" />
+        <input type="submit" value="Buscar" />
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Criar Pessoa</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Data de Cadastro</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> <a asp-action="Details" asp-route-id="@item.Id">@item.Nome </a></td>
+                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Apelido</a></td>
+                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Telefone</a></td>
+                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Email</a></td>
+                <td>@item.DataCadastro.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm editButton">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm dltButton">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
